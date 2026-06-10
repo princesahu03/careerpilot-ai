@@ -1,33 +1,39 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>🚀 CareerPilot AI</h1>
-      <p>
-        Your AI-powered career assistant for resume analysis,
-        interview preparation, and skill gap assessment.
-      </p>
+    <div className="page">
+      <div className="title">
+        <h1>🚀 CareerPilot AI</h1>
+        <p>Your AI Powered Career Assistant</p>
+      </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "20px",
-          marginTop: "40px",
-        }}
-      >
-        <div style={{ border: "1px solid #ddd", padding: "20px" }}>
-          <h3>📄 Resume Analyzer</h3>
-          <p>Analyze resumes and get AI feedback.</p>
+      <div className="card-container">
+        <div className="card">
+          <h2>📄 Resume Analyzer</h2>
+          <p>Analyze resumes and get AI suggestions.</p>
+
+          <Link to="/resume">
+            <button className="btn">Open</button>
+          </Link>
         </div>
 
-        <div style={{ border: "1px solid #ddd", padding: "20px" }}>
-          <h3>🎤 Interview Prep</h3>
+        <div className="card">
+          <h2>🎤 Interview Prep</h2>
           <p>Generate interview questions instantly.</p>
+
+          <Link to="/interview">
+            <button className="btn">Open</button>
+          </Link>
         </div>
 
-        <div style={{ border: "1px solid #ddd", padding: "20px" }}>
-          <h3>📈 Skill Gap Analysis</h3>
-          <p>Discover missing skills and learning paths.</p>
+        <div className="card">
+          <h2>📈 Skill Gap Analysis</h2>
+          <p>Find missing skills and learning roadmap.</p>
+
+          <Link to="/skills">
+            <button className="btn">Open</button>
+          </Link>
         </div>
       </div>
     </div>
