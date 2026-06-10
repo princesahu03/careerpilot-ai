@@ -5,41 +5,38 @@ function ResumeAnalyzer() {
   const [result, setResult] = useState("");
 
   const analyzeResume = () => {
-    setResult(`
-Resume Score: 80/100
+    if (!resume) {
+      setResult("Please paste your resume.");
+      return;
+    }
 
-Strengths:
-✔ JavaScript
-✔ React
-
-Suggestions:
-✔ Add Projects
-✔ Add Internship Experience
-    `);
+    setResult(
+      "AI Analysis: Your resume looks good. Add more projects, achievements, and measurable results."
+    );
   };
 
   return (
-    <div className="page">
-      <h1>Resume Analyzer</h1>
+    <div style={{ padding: "40px" }}>
+      <h1>📄 Resume Analyzer</h1>
 
       <textarea
-        className="textarea"
+        rows="12"
+        cols="80"
         placeholder="Paste your resume here..."
         value={resume}
         onChange={(e) => setResume(e.target.value)}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
-      <button className="btn" onClick={analyzeResume}>
+      <button onClick={analyzeResume}>
         Analyze Resume
       </button>
 
-      {result && (
-        <div className="result-box">
-          <pre>{result}</pre>
-        </div>
-      )}
+      <p style={{ marginTop: "20px" }}>
+        {result}
+      </p>
     </div>
   );
 }
