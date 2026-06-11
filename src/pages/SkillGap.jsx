@@ -1,51 +1,85 @@
 import { useState } from "react";
+import { askGemini } from "../services/gemini";
 
 function SkillGap() {
-  const [skill, setSkill] = useState("");
-  const [result, setResult] = useState([]);
+  const [role, setRole] = useState("");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const analyzeSkill = () => {
-    if (!skill) {
+  const analyzeSkill = async () => {
+    if (!role) {
       alert("Enter your target role");
       return;
     }
 
-    const roadmap = [
-      "HTML & CSS",
-      "JavaScript",
-      "React",
-      "Git & GitHub",
-      "Node.js",
-      "Projects & Portfolio",
-      "Interview Preparation",
-    ];
+    setResult("");
+    setLoading(true);
 
-    setResult(roadmap);
+    const prompt = `
+You are an expert career mentor.
+
+Create a complete skill roadmap for becoming a ${role}.
+
+Include:
+
+1. Required Skills
+2. Tools & Technologies
+3. Learning Path (Beginner to Advanced)
+4. Recommended Projects
+5. Interview Preparation Tips
+
+Format the answer clearly with headings and bullet points.
+`;
+
+    try {
+      const response = await askGemini(prompt);
+      setResult(response);
+    } catch (error) {
+      console.error(error);
+      setResult("Error generating roadmap.");
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>📈 Skill Gap Analysis</h1>
+    <div className="page">
+      <h1>📈 AI Skill Gap Analysis</h1>
 
       <input
         type="text"
-        placeholder="Target Role (e.g. Frontend Developer)"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
+        placeholder="Target Role (Frontend Developer, Data Analyst...)"
+        value={role}
+        onChange={(e) => {
+          setRole(e.target.value);
+          setResult("");
+        }}
       />
 
+      <br />
+      <br />
+
       <button
+        className="btn"
         onClick={analyzeSkill}
-        style={{ marginLeft: "10px" }}
+        disabled={loading}
       >
-        Analyze
+        {loading ? "Analyzing..." : "Analyze"}
       </button>
 
-      <ul>
-        {result.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      {loading && (
+        <p style={{ marginTop: "20px" }}>
+          🤖 AI is creating your roadmap...
+        </p>
+      )}
+
+      {result && (
+        <div className="result-box">
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {result}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
