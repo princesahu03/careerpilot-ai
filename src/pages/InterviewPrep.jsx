@@ -12,7 +12,7 @@ function InterviewPrep() {
       return;
     }
 
-    setQuestions(""); // Purane questions hata do
+    setQuestions("");
     setLoading(true);
 
     const prompt = `
@@ -42,6 +42,16 @@ Make the questions practical and industry-relevant.
     setLoading(false);
   };
 
+  const copyQuestions = () => {
+    navigator.clipboard.writeText(questions);
+    alert("Questions copied successfully!");
+  };
+
+  const clearData = () => {
+    setRole("");
+    setQuestions("");
+  };
+
   return (
     <div className="page">
       <h1>🎤 AI Interview Prep</h1>
@@ -52,12 +62,9 @@ Make the questions practical and industry-relevant.
         value={role}
         onChange={(e) => {
           setRole(e.target.value);
-          setQuestions(""); // Typing start hote hi purana result remove
+          setQuestions("");
         }}
       />
-
-      <br />
-      <br />
 
       <button
         className="btn"
@@ -78,6 +85,16 @@ Make the questions practical and industry-relevant.
           <pre style={{ whiteSpace: "pre-wrap" }}>
             {questions}
           </pre>
+
+          <div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
+            <button className="btn" onClick={copyQuestions}>
+              📋 Copy
+            </button>
+
+            <button className="btn" onClick={clearData}>
+              🗑 Clear
+            </button>
+          </div>
         </div>
       )}
     </div>

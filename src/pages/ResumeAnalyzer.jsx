@@ -7,11 +7,12 @@ function ResumeAnalyzer() {
   const [loading, setLoading] = useState(false);
 
   const analyzeResume = async () => {
-    if (!resume) {
-      setResult("Please paste your resume.");
-      return;
+    if (resume.trim().length < 50) {
+    setResult("Please paste a complete resume.");
+    return;
     }
 
+    setResult("");
     setLoading(true);
 
     const prompt = `
@@ -29,10 +30,20 @@ Resume:
 ${resume}
 `;
 
-    const response = await askGemini(prompt);
+    try {
+      const response = await askGemini(prompt);
+      setResult(response);
+    } catch (error) {
+      setResult("Unable to analyze resume. Please try again.");
+      console.error(error);
+    }
 
-    setResult(response);
     setLoading(false);
+  };
+
+  const copyResult = () => {
+    navigator.clipboard.writeText(result);
+    alert("Result copied successfully!");
   };
 
   return (
@@ -40,17 +51,17 @@ ${resume}
       <h1>📄 Resume Analyzer</h1>
 
       <textarea
-        className="textarea"
         placeholder="Paste your resume here..."
         value={resume}
         onChange={(e) => setResume(e.target.value)}
       />
 
-      <br />
-      <br />
-
-      <button className="btn" onClick={analyzeResume}>
-        Analyze Resume
+      <button
+        className="btn"
+        onClick={analyzeResume}
+        disabled={loading}
+      >
+        {loading ? "Analyzing..." : "Analyze Resume"}
       </button>
 
       {loading && (
@@ -61,9 +72,15 @@ ${resume}
 
       {result && (
         <div className="result-box">
-          <pre style={{ whiteSpace: "pre-wrap" }}>
-            {result}
-          </pre>
+          <pre>{result}</pre>
+
+          <button
+            className="btn"
+            onClick={copyResult}
+            style={{ marginTop: "15px" }}
+          >
+            📋 Copy Result
+          </button>
         </div>
       )}
     </div>

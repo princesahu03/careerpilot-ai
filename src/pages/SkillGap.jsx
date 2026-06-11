@@ -42,6 +42,16 @@ Format the answer clearly with headings and bullet points.
     setLoading(false);
   };
 
+  const copyRoadmap = () => {
+    navigator.clipboard.writeText(result);
+    alert("Roadmap copied successfully!");
+  };
+
+  const clearData = () => {
+    setRole("");
+    setResult("");
+  };
+
   return (
     <div className="page">
       <h1>📈 AI Skill Gap Analysis</h1>
@@ -55,9 +65,6 @@ Format the answer clearly with headings and bullet points.
           setResult("");
         }}
       />
-
-      <br />
-      <br />
 
       <button
         className="btn"
@@ -78,6 +85,16 @@ Format the answer clearly with headings and bullet points.
           <pre style={{ whiteSpace: "pre-wrap" }}>
             {result}
           </pre>
+
+          <div style={{ marginTop: "15px", display: "flex", gap: "10px" }}>
+            <button className="btn" onClick={copyRoadmap}>
+              📋 Copy
+            </button>
+
+            <button className="btn" onClick={clearData}>
+              🗑 Clear
+            </button>
+          </div>
         </div>
       )}
     </div>

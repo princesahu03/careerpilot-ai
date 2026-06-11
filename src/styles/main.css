@@ -6,142 +6,67 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
   min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+  color: white;
 }
 
 /* Navbar */
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 8%;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
+  padding: 18px 8%;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
 nav h2 {
-  font-size: 28px;
   color: #60a5fa;
+  font-size: 28px;
+}
+
+nav div {
+  display: flex;
+  gap: 25px;
 }
 
 nav a {
-  color: white;
   text-decoration: none;
-  margin-left: 25px;
+  color: #e2e8f0;
   font-weight: 500;
   transition: 0.3s;
 }
 
 nav a:hover {
   color: #60a5fa;
-  transform: translateY(-2px);
 }
 
-/* Home */
-.home {
-  text-align: center;
-  padding: 80px 20px;
-}
+/* Page Layout */
 
-.home h1 {
-  font-size: 4rem;
-  margin-bottom: 15px;
-}
-
-.home p {
-  font-size: 1.2rem;
-  color: #cbd5e1;
-}
-
-/* Cards */
-.card-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-top: 60px;
-}
-
-.card {
-  width: 320px;
-  background: rgba(255,255,255,0.08);
-  padding: 30px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  transition: 0.4s;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(96,165,250,0.4);
-}
-
-.card h2 {
-  margin-bottom: 15px;
-}
-
-.card p {
-  color: #cbd5e1;
-  margin-bottom: 20px;
-}
-
-.btn {
-  border: none;
-  background: #2563eb;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #3b82f6;
-  transform: scale(1.05);
-}
-
-/* Pages */
 .page {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   padding: 50px 20px;
+  animation: fadeIn 0.4s ease;
 }
 
 .page h1 {
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.5rem;
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  border: none;
-  margin: 15px 0;
-  font-size: 16px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-ul {
-  margin-top: 20px;
-}
-
-li {
-  margin-bottom: 10px;
-}
+/* Hero */
 
 .hero {
   text-align: center;
-  padding: 40px 20px 70px;
+  padding: 70px 20px;
 }
 
 .hero h1 {
@@ -150,20 +75,239 @@ li {
 }
 
 .hero-subtitle {
-  max-width: 700px;
-  margin: 0 auto;
   color: #cbd5e1;
-  font-size: 1.2rem;
+  max-width: 750px;
+  margin: auto;
   line-height: 1.7;
+  font-size: 1.1rem;
 }
 
 .hero-buttons {
   margin-top: 30px;
 }
 
+/* Cards */
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.card {
+  width: 310px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.35s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(59,130,246,0.35);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #cbd5e1;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* Inputs */
+
+input,
+textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 16px;
+  margin-bottom: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 15px rgba(96,165,250,0.35);
+}
+
+textarea {
+  min-height: 250px;
+  resize: vertical;
+}
+
+/* Buttons */
+
+.btn {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(59,130,246,0.35);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Result Box */
+
+.result-box {
+  margin-top: 25px;
+  padding: 22px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.result-box pre {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: #e2e8f0;
+}
+
+/* Footer */
+
 .footer {
   text-align: center;
-  margin-top: 70px;
+  padding: 30px;
   color: #94a3b8;
-  font-size: 14px;
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .page h1 {
+    font-size: 2rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+/* Better Buttons */
+
+.btn {
+  min-width: 140px;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Result Box Animation */
+
+.result-box {
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+/* Better Input Placeholder */
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* Result Box Hover */
+
+.result-box:hover {
+  border-color: rgba(96,165,250,0.4);
+}
+
+/* Mobile Improvements */
+
+@media (max-width: 768px) {
+
+  .btn {
+    width: 100%;
+  }
+
+  .result-box button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  nav h2 {
+    font-size: 24px;
+  }
 }
