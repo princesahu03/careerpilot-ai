@@ -1,49 +1,85 @@
 import { useState } from "react";
+import { askGemini } from "../services/gemini";
 
 function InterviewPrep() {
   const [role, setRole] = useState("");
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const generateQuestions = () => {
+  const generateQuestions = async () => {
     if (!role) {
       alert("Enter a job role");
       return;
     }
 
-    const sampleQuestions = [
-      `Tell me about yourself as a ${role}.`,
-      `Why do you want to become a ${role}?`,
-      `What are your strengths?`,
-      `Describe a challenging project you worked on.`,
-      `Why should we hire you?`,
-    ];
+    setQuestions(""); // Purane questions hata do
+    setLoading(true);
 
-    setQuestions(sampleQuestions);
+    const prompt = `
+You are an expert technical interviewer.
+
+Generate 10 interview questions for a ${role}.
+
+Format:
+
+Beginner Questions
+
+Intermediate Questions
+
+Advanced Questions
+
+Make the questions practical and industry-relevant.
+`;
+
+    try {
+      const response = await askGemini(prompt);
+      setQuestions(response);
+    } catch (error) {
+      setQuestions("Error generating questions.");
+      console.error(error);
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>🎤 Interview Prep</h1>
+    <div className="page">
+      <h1>🎤 AI Interview Prep</h1>
 
       <input
         type="text"
         placeholder="Enter Job Role"
         value={role}
-        onChange={(e) => setRole(e.target.value)}
+        onChange={(e) => {
+          setRole(e.target.value);
+          setQuestions(""); // Typing start hote hi purana result remove
+        }}
       />
 
+      <br />
+      <br />
+
       <button
+        className="btn"
         onClick={generateQuestions}
-        style={{ marginLeft: "10px" }}
+        disabled={loading}
       >
-        Generate Questions
+        {loading ? "Generating..." : "Generate Questions"}
       </button>
 
-      <ul>
-        {questions.map((q, index) => (
-          <li key={index}>{q}</li>
-        ))}
-      </ul>
+      {loading && (
+        <p style={{ marginTop: "20px" }}>
+          🤖 AI is generating interview questions...
+        </p>
+      )}
+
+      {questions && (
+        <div className="result-box">
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            {questions}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
