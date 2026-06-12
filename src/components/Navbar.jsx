@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="navbar">
-      <h2>🚀 CareerPilot AI</h2>
+      <Link
+        to="/"
+        style={{
+        textDecoration: "none",
+        color: "#60a5fa"
+      }}
+>
+        <h2>🚀 CareerPilot AI</h2>
+</Link>
 
       <div className="nav-links">
         <Link to="/">Home</Link>

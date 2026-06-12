@@ -7,10 +7,10 @@ function SkillGap() {
   const [loading, setLoading] = useState(false);
 
   const analyzeSkill = async () => {
-    if (!role) {
-      alert("Enter your target role");
-      return;
-    }
+    if (role.trim().length < 3) {
+    alert("Please enter a valid role");
+    return;
+  }
 
     setResult("");
     setLoading(true);

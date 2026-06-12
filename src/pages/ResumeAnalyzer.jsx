@@ -46,6 +46,11 @@ ${resume}
     alert("Result copied successfully!");
   };
 
+  const clearData = () => {
+  setResume("");
+  setResult("");
+  };
+
   return (
     <div className="page">
       <h1>📄 Resume Analyzer</h1>
@@ -80,6 +85,14 @@ ${resume}
             style={{ marginTop: "15px" }}
           >
             📋 Copy Result
+          </button>
+          <button
+            className="btn"
+            onClick={clearData}
+            style={{ marginTop: "15px", marginLeft: "10px" }}
+          >
+
+          🗑 Clear
           </button>
         </div>
       )}

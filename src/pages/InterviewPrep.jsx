@@ -7,10 +7,10 @@ function InterviewPrep() {
   const [loading, setLoading] = useState(false);
 
   const generateQuestions = async () => {
-    if (!role) {
-      alert("Enter a job role");
+      if (role.trim().length < 3) {
+      alert("Please enter a valid role");
       return;
-    }
+    } 
 
     setQuestions("");
     setLoading(true);
